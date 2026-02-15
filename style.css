@@ -45,13 +45,14 @@ body {
     user-select: none;
 }
 
+/* Обе кнопки на одном уровне - сверху */
 .music-btn {
     top: 20px;
     right: 20px;
 }
 
 .theme-toggle {
-    top: 20px;
+    top: 20px;  /* Одинаковый отступ сверху */
     left: 20px;
 }
 
@@ -71,41 +72,50 @@ body {
     transform: scale(0.95);
 }
 
-/* Планшеты (от 768px до 1024px) */
+/* ========== АДАПТИВНОСТЬ ДЛЯ РАЗНЫХ ЭКРАНОВ ========== */
+
+/* Планшеты и маленькие ноутбуки */
 @media (max-width: 1024px) {
     .music-btn, .theme-toggle {
         padding: 10px 20px;
         font-size: 15px;
-        backdrop-filter: blur(15px);
+    }
+    
+    .music-btn {
+        top: 20px;
+        right: 20px;
+    }
+    
+    .theme-toggle {
+        top: 20px;
+        left: 20px;
     }
 }
 
-/* Маленькие планшеты и большие телефоны (от 600px до 768px) */
+/* Телефоны в портретной ориентации */
 @media (max-width: 768px) {
     .music-btn, .theme-toggle {
         padding: 8px 16px;
         font-size: 14px;
-        border-width: 1.5px;
     }
     
+    /* Супер важно! На телефонах тоже одинаковый top */
     .music-btn {
         top: 15px;
         right: 15px;
     }
     
     .theme-toggle {
-        top: 70px;
+        top: 15px;  /* Ровно столько же, сколько у музыки */
         left: 15px;
     }
 }
 
-/* Телефоны (до 600px) */
-@media (max-width: 600px) {
+/* Маленькие телефоны */
+@media (max-width: 480px) {
     .music-btn, .theme-toggle {
         padding: 8px 14px;
         font-size: 13px;
-        backdrop-filter: blur(8px);
-        background: rgba(255, 255, 255, 0.2);
     }
     
     .music-btn {
@@ -114,13 +124,13 @@ body {
     }
     
     .theme-toggle {
-        top: 60px;
+        top: 10px;  /* Одинаково */
         left: 10px;
     }
 }
 
-/* Очень маленькие телефоны (до 400px) */
-@media (max-width: 400px) {
+/* Очень маленькие телефоны */
+@media (max-width: 360px) {
     .music-btn, .theme-toggle {
         padding: 6px 12px;
         font-size: 12px;
@@ -132,12 +142,12 @@ body {
     }
     
     .theme-toggle {
-        top: 52px;
+        top: 8px;  /* Одинаково */
         left: 8px;
     }
 }
 
-/* Альбомная ориентация на телефонах */
+/* Альбомная ориентация (телефон повернут горизонтально) */
 @media (max-width: 900px) and (orientation: landscape) {
     .music-btn, .theme-toggle {
         padding: 6px 14px;
@@ -150,17 +160,16 @@ body {
     }
     
     .theme-toggle {
-        top: 8px;
+        top: 8px;  /* Одинаково */
         left: 8px;
     }
 }
 
-/* Большие экраны (от 1440px) */
+/* Большие экраны */
 @media (min-width: 1440px) {
     .music-btn, .theme-toggle {
         padding: 14px 28px;
         font-size: 18px;
-        border-width: 2.5px;
     }
     
     .music-btn {
@@ -169,7 +178,7 @@ body {
     }
     
     .theme-toggle {
-        top: 30px;
+        top: 30px;  /* Одинаково */
         left: 30px;
     }
 }
@@ -190,6 +199,18 @@ body.night-mode .theme-toggle {
         color: #0b0b2b;
         border-color: #ffd700;
         box-shadow: 0 8px 25px rgba(255, 215, 0, 0.4);
+    }
+}
+
+/* Для мобильных убираем hover эффекты */
+@media (max-width: 768px) {
+    .music-btn:hover, .theme-toggle:hover {
+        transform: none;
+    }
+    
+    body.night-mode .music-btn:hover,
+    body.night-mode .theme-toggle:hover {
+        transform: none;
     }
 }
 
@@ -694,3 +715,4 @@ body.night-mode .add-reason-btn:hover {
     }
 
 }
+
