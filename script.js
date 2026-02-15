@@ -278,10 +278,10 @@ function createHeart() {
 musicBtn.addEventListener('click', () => {
     if (isMusicPlaying) {
         bgMusic.pause();
-        musicBtn.innerHTML = 'Включить музыку';
+        musicBtn.innerHTML = '🔇 Включить музыку';
     } else {
         bgMusic.play().catch(e => console.log('Автовоспроизведение заблокировано'));
-        musicBtn.innerHTML = 'Выключить музыку';
+        musicBtn.innerHTML = '🔊 Выключить музыку';
     }
     isMusicPlaying = !isMusicPlaying;
 });
@@ -426,3 +426,4 @@ document.addEventListener('click', (e) => {
     }
 
 });
+
