@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Сюрприз для тебя ❤️</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Кнопка включения музыки -->
+    <button class="music-btn" id="musicBtn">Включить музыку</button>
+    <!--Кнопка ночного режима-->
+    <button class="theme-toggle" id="themeToggle">🌙 Ночной режим</button>
+    
+    <div class="container">
+        <div class="envelope" id="envelope">
+             <img src="envelope.png" alt="Конверт" class="envelope-img" id="envelopeImg">
+            <p>Нажми на конверт</p>
+        </div>
+        
+        <div class="message hidden" id="message">
+            <h1 class="glow-text" id="nameTitle">С Днём Святого Валентина, [Имя]!</h1>
+            
+            <!-- Слайдер с фото (добавь свои фото) -->
+            <div class="slider">
+                <div class="slides">
+                    <img src="1.jpeg" alt="Фото 1" class="slide active">
+                    <img src="2.jpeg" alt="Фото 2" class="slide">
+                    <img src="3.jpeg" alt="Фото 3" class="slide">
+                    <img src="4.jpeg" alt="Фото 3" class="slide">
+                    <img src="5.jpeg" alt="Фото 3" class="slide">
+                    <img src="6.jpeg" alt="Фото 3" class="slide">
+                    <img src="7.jpeg" alt="Фото 3" class="slide">
+                </div>
+                <button class="slider-btn prev" id="prevSlide">←</button>
+                <button class="slider-btn next" id="nextSlide">→</button>
+            </div>
+            
+            <p class="love-text">С тобой я чувствую больше, чем когда-либо чувствовала.
+С тобой я настоящая.
+Ты — мой дом. Даже если вокруг шум, хаос и всё идёт не так.
+Рядом с тобой мне спокойно.
+Мне нравится просыпаться с мыслью о тебе. Нравится знать, что ты есть в моей жизни.
+Я люблю тебя ❤️</p>
+            
+            <!-- Счетчик "Почему ты лучший/ая" -->
+            <div class="reasons">
+                <h3>Топ причин, почему я люблю тебя:</h3>
+                <ul id="reasonList">
+                    <li>✨ Твоя улыбка</li>
+                    <li>✨ Твой смех</li>
+                    <li>✨ То, как ты заботишься обо мне</li>
+                </ul>
+                <button class="add-reason-btn" id="addReason">➕ Добавить причину</button>
+            </div>
+            
+            <p class="from">С любовью, твоё Солнце 💕</p>
+            <div class="hearts">❤️❤️❤️</div>
+        </div>
+    </div>
+    
+    <!-- Аудио (тихо играет фоном) -->
+    <audio id="bgMusic" loop>
+        <source src="Mitski_-_My_Love_Mine_All_Mine_76792577.mp3" type="audio/mpeg">
+    </audio>
+    
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,643 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(-45deg, #fd99bf, #ff6fa6, #80d2f8, #f891ff);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow-x: hidden;
+}
+
+@keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* ========== КНОПКИ (МУЗЫКА И НОЧНОЙ РЕЖИМ) ========== */
+.music-btn, .theme-toggle {
+    position: fixed;
+    padding: 12px 24px;
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    color: white;
+    border-radius: 50px;
+    cursor: pointer;
+    z-index: 1000;
+    transition: all 0.3s ease;
+    font-weight: bold;
+    font-size: 16px;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    white-space: nowrap;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+    user-select: none;
+}
+
+.music-btn {
+    top: 20px;
+    right: 20px;
+}
+
+.theme-toggle {
+    top: 20px;
+    left: 20px;
+}
+
+/* Эффект при наведении (только для устройств с мышью) */
+@media (hover: hover) {
+    .music-btn:hover, .theme-toggle:hover {
+        background: white;
+        color: #e73c7e;
+        transform: translateY(-3px);
+        box-shadow: 0 8px 25px rgba(255, 255, 255, 0.3);
+        border-color: white;
+    }
+}
+
+/* Активное состояние (при клике/тапе) */
+.music-btn:active, .theme-toggle:active {
+    transform: scale(0.95);
+}
+
+/* Планшеты (от 768px до 1024px) */
+@media (max-width: 1024px) {
+    .music-btn, .theme-toggle {
+        padding: 10px 20px;
+        font-size: 15px;
+        backdrop-filter: blur(15px);
+    }
+}
+
+/* Маленькие планшеты и большие телефоны (от 600px до 768px) */
+@media (max-width: 768px) {
+    .music-btn, .theme-toggle {
+        padding: 8px 16px;
+        font-size: 14px;
+        border-width: 1.5px;
+    }
+    
+    .music-btn {
+        top: 15px;
+        right: 15px;
+    }
+    
+    .theme-toggle {
+        top: 70px;
+        left: 15px;
+    }
+}
+
+/* Телефоны (до 600px) */
+@media (max-width: 600px) {
+    .music-btn, .theme-toggle {
+        padding: 8px 14px;
+        font-size: 13px;
+        backdrop-filter: blur(8px);
+        background: rgba(255, 255, 255, 0.2);
+    }
+    
+    .music-btn {
+        top: 10px;
+        right: 10px;
+    }
+    
+    .theme-toggle {
+        top: 60px;
+        left: 10px;
+    }
+}
+
+/* Очень маленькие телефоны (до 400px) */
+@media (max-width: 400px) {
+    .music-btn, .theme-toggle {
+        padding: 6px 12px;
+        font-size: 12px;
+    }
+    
+    .music-btn {
+        top: 8px;
+        right: 8px;
+    }
+    
+    .theme-toggle {
+        top: 52px;
+        left: 8px;
+    }
+}
+
+/* Альбомная ориентация на телефонах */
+@media (max-width: 900px) and (orientation: landscape) {
+    .music-btn, .theme-toggle {
+        padding: 6px 14px;
+        font-size: 13px;
+    }
+    
+    .music-btn {
+        top: 8px;
+        right: 8px;
+    }
+    
+    .theme-toggle {
+        top: 8px;
+        left: 8px;
+    }
+}
+
+/* Большие экраны (от 1440px) */
+@media (min-width: 1440px) {
+    .music-btn, .theme-toggle {
+        padding: 14px 28px;
+        font-size: 18px;
+        border-width: 2.5px;
+    }
+    
+    .music-btn {
+        top: 30px;
+        right: 30px;
+    }
+    
+    .theme-toggle {
+        top: 30px;
+        left: 30px;
+    }
+}
+
+/* Ночной режим для кнопок */
+body.night-mode .music-btn,
+body.night-mode .theme-toggle {
+    background: rgba(0, 0, 0, 0.3);
+    border-color: rgba(255, 215, 0, 0.5);
+    color: #ffd700;
+    box-shadow: 0 4px 15px rgba(255, 215, 0, 0.2);
+}
+
+@media (hover: hover) {
+    body.night-mode .music-btn:hover,
+    body.night-mode .theme-toggle:hover {
+        background: #ffd700;
+        color: #0b0b2b;
+        border-color: #ffd700;
+        box-shadow: 0 8px 25px rgba(255, 215, 0, 0.4);
+    }
+}
+
+.container {
+    text-align: center;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    padding: 40px;
+    border-radius: 30px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+    border: 2px solid rgba(255,255,255,0.5);
+    max-width: 600px;
+    width: 90%;
+    margin: 20px;
+    position: relative;
+    z-index: 10;
+}
+
+.envelope {
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.envelope:hover {
+    transform: scale(1.1);
+}
+
+.envelope-img {
+    width: 500px;
+    height: auto;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    filter: drop-shadow(0 10px 15px rgba(0,0,0,0.2));
+    animation: gentleWobble 4s ease-in-out infinite;
+}
+
+.envelope-img:hover {
+    transform: scale(1.1) rotate(3deg);
+    filter: drop-shadow(0 15px 20px rgba(0,0,0,0.3)) drop-shadow(0 0 15px rgba(255, 77, 166, 0.5));
+}
+
+@keyframes gentleWobble {
+    0%, 100% { transform: rotate(0deg); }
+    25% { transform: rotate(5deg); }
+    75% { transform: rotate(-5deg); }
+}
+
+.envelope p {
+    font-size: 20px;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+.message {
+    animation: fadeInUp 1s ease;
+}
+
+.glow-text {
+    color: white;
+    font-size: 32px;
+    text-shadow: 0 0 10px #fff, 0 0 20px #ff4da6, 0 0 30px #ff4da6;
+    animation: glow 2s ease-in-out infinite alternate;
+    margin-bottom: 20px;
+}
+
+@keyframes glow {
+    from { text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #ff4da6; }
+    to { text-shadow: 0 0 20px #fff, 0 0 30px #ff4da6, 0 0 40px #ff4da6; }
+}
+
+/* Слайдер */
+.slider {
+    position: relative;
+    width: 100%;
+    max-width: 400px;
+    height: 500px;
+    margin: 20px auto;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    background: #ffe6f0;
+}
+
+.slides {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    border-radius: 15px;
+}
+
+.slide.active {
+    opacity: 1;
+}
+
+.slider-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255,255,255,0.5);
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    font-size: 20px;
+    cursor: pointer;
+    transition: all 0.3s;
+    z-index: 20;
+}
+
+.slider-btn:hover {
+    background: white;
+    transform: translateY(-50%) scale(1.1);
+}
+
+.prev {
+    left: 10px;
+}
+
+.next {
+    right: 10px;
+}
+
+/* Причины */
+.reasons {
+    background: rgba(255,255,255,0.3);
+    border-radius: 15px;
+    padding: 20px;
+    margin: 20px 0;
+}
+
+.reasons h3 {
+    color: white;
+    margin-bottom: 15px;
+}
+
+.reasons ul {
+    list-style: none;
+    margin-bottom: 15px;
+}
+
+.reasons li {
+    color: white;
+    font-size: 18px;
+    margin: 10px 0;
+    padding: 5px;
+    background: rgba(255,255,255,0.2);
+    border-radius: 10px;
+    animation: slideIn 0.5s ease;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.add-reason-btn {
+    padding: 10px 20px;
+    background: #ff4da6;
+    border: none;
+    color: white;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: all 0.3s;
+}
+
+.add-reason-btn:hover {
+    background: #ff1a8c;
+    transform: scale(1.05);
+}
+
+.love-text {
+    color: white;
+    font-size: 20px;
+    font-style: italic;
+    margin: 20px 0;
+    line-height: 1.6;
+}
+
+.from {
+    color: white;
+    font-size: 18px;
+    margin-top: 20px;
+    font-weight: bold;
+}
+
+.hearts {
+    font-size: 40px;
+    margin-top: 20px;
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+}
+
+.hidden {
+    display: none;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Анимация для падающих сердечек */
+.floating-heart {
+    position: fixed;
+    color: #ff4da6;
+    user-select: none;
+    pointer-events: none;
+    z-index: 9999;
+    animation: floatHeart linear forwards;
+    font-size: 20px;
+}
+
+@keyframes floatHeart {
+    0% {
+        transform: translateY(100vh) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-100px) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* НОЧНОЙ РЕЖИМ */
+body.night-mode {
+    background: linear-gradient(135deg, #0b0b2b, #1a1a3a, #2d1b4a);
+    background-size: 400% 400%;
+    animation: nightGradient 15s ease infinite;
+}
+
+@keyframes nightGradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+body.night-mode .container {
+    background: rgba(10, 10, 30, 0.6);
+    border: 2px solid rgba(255, 215, 0, 0.3);
+    box-shadow: 0 20px 50px rgba(255, 215, 0, 0.2);
+}
+
+body.night-mode .glow-text {
+    text-shadow: 0 0 10px gold, 0 0 20px #ffd700, 0 0 30px #ffb347;
+}
+
+body.night-mode .love-text,
+body.night-mode .from,
+body.night-mode .reasons h3 {
+    color: #ffd700;
+}
+
+body.night-mode .reasons {
+    background: rgba(255, 215, 0, 0.1);
+    border: 1px solid rgba(255, 215, 0, 0.3);
+}
+
+body.night-mode .reasons li {
+    background: rgba(255, 215, 0, 0.15);
+    color: #fff0b5;
+}
+
+body.night-mode .add-reason-btn {
+    background: #b8860b;
+}
+
+body.night-mode .add-reason-btn:hover {
+    background: #daa520;
+}
+
+/* ЗВЕЗДЫ */
+.star {
+    position: fixed;
+    background: white;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 1;
+    animation: twinkle linear infinite;
+}
+
+@keyframes twinkle {
+    0%, 100% { 
+        opacity: 1;
+        transform: scale(1);
+    }
+    50% { 
+        opacity: 0.3;
+        transform: scale(0.8);
+    }
+}
+
+/* Падающая звезда */
+.shooting-star {
+    position: fixed;
+    width: 2px;
+    height: 2px;
+    background: gold;
+    box-shadow: 0 0 10px gold, 0 0 20px gold;
+    transform: rotate(45deg);
+    animation: shoot 3s linear forwards;
+    z-index: 999;
+}
+
+@keyframes shoot {
+    0% {
+        transform: translateX(0) translateY(0) rotate(45deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translateX(200px) translateY(200px) rotate(45deg);
+        opacity: 0;
+    }
+}
+
+/* Луна */
+.moon {
+    position: fixed;
+    top: 80px;
+    right: 80px;
+    width: 60px;
+    height: 60px;
+    background: radial-gradient(circle at 30% 30%, #fff5c1, #f0e68c);
+    border-radius: 50%;
+    box-shadow: 0 0 50px #fff5c1;
+    z-index: 2;
+    animation: moonGlow 4s ease-in-out infinite;
+    pointer-events: none;
+}
+
+@keyframes moonGlow {
+    0%, 100% { box-shadow: 0 0 50px #fff5c1; }
+    50% { box-shadow: 0 0 80px #ffd700; }
+}
+
+/* Облака */
+.cloud {
+    position: fixed;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 1000px;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.cloud::before,
+.cloud::after {
+    content: '';
+    position: absolute;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+}
+
+.cloud1 {
+    width: 150px;
+    height: 50px;
+    top: 100px;
+    left: 10%;
+    animation: floatCloud 30s linear infinite;
+}
+
+.cloud1::before {
+    width: 60px;
+    height: 60px;
+    top: -30px;
+    left: 20px;
+}
+
+.cloud1::after {
+    width: 80px;
+    height: 80px;
+    top: -40px;
+    left: 60px;
+}
+
+@keyframes floatCloud {
+    from { transform: translateX(-100%); }
+    to { transform: translateX(100vw); }
+}
+
+/* Общая адаптивность */
+@media (max-width: 768px) {
+    .container {
+        padding: 20px;
+    }
+    
+    .glow-text {
+        font-size: 24px;
+    }
+    
+    .slider {
+        max-width: 300px;
+        height: 350px;
+    }
+    
+    .envelope-img {
+        width: 250px;
+    }
+    
+    .moon {
+        width: 40px;
+        height: 40px;
+        top: 120px;
+        right: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .slider {
+        height: 250px;
+    }
+    
+    .envelope-img {
+        width: 200px;
+    }
+    
+    .love-text {
+        font-size: 18px;
+    }
+    
+    .reasons li {
+        font-size: 16px;
+    }
+}
