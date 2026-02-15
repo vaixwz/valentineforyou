@@ -193,6 +193,58 @@ body.night-mode .theme-toggle {
     }
 }
 
+/* Экран загрузки */
+.loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+    transition: opacity 1s;
+}
+
+.loading-screen.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.loading-content {
+    text-align: center;
+    color: white;
+}
+
+.loading-heart {
+    font-size: 80px;
+    animation: loadingPulse 1s infinite;
+}
+
+@keyframes loadingPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+}
+
+.loading-bar {
+    width: 200px;
+    height: 10px;
+    background: rgba(255,255,255,0.3);
+    border-radius: 10px;
+    margin-top: 20px;
+    overflow: hidden;
+}
+
+.loading-progress {
+    width: 0%;
+    height: 100%;
+    background: white;
+    border-radius: 10px;
+    transition: width 0.3s;
+}
+
 .container {
     text-align: center;
     background: rgba(255, 255, 255, 0.2);
@@ -640,4 +692,5 @@ body.night-mode .add-reason-btn:hover {
     .reasons li {
         font-size: 16px;
     }
+
 }
