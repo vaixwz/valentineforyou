@@ -1,3 +1,51 @@
+// ========== ЗАГРУЗКА ==========
+const loadingScreen = document.getElementById('loadingScreen');
+const loadingProgress = document.getElementById('loadingProgress');
+
+// Список всех ресурсов для загрузки
+const resources = [
+    'envelope.png',
+    'photo1.jpg',
+    'photo2.jpg',
+    'photo3.jpg',
+    'song.mp3'
+];
+
+let loadedCount = 0;
+
+// Функция обновления прогресса
+function updateProgress() {
+    loadedCount++;
+    const percent = (loadedCount / resources.length) * 100;
+    loadingProgress.style.width = percent + '%';
+    
+    if (loadedCount === resources.length) {
+        setTimeout(() => {
+            loadingScreen.classList.add('hidden');
+        }, 500);
+    }
+}
+
+// Загружаем каждое изображение
+resources.forEach(resource => {
+    if (resource.match(/\.(jpg|png|gif)$/)) {
+        const img = new Image();
+        img.src = resource;
+        img.onload = updateProgress;
+        img.onerror = updateProgress; // Даже если ошибка, идем дальше
+    } else if (resource.match(/\.mp3$/)) {
+        // Для музыки используем другой подход
+        fetch(resource)
+            .then(updateProgress)
+            .catch(updateProgress);
+    }
+});
+
+// Если что-то пошло не так, скрываем загрузку через 5 секунд
+setTimeout(() => {
+    loadingScreen.classList.add('hidden');
+}, 5000);
+
 const envelope = document.getElementById('envelope');
 const message = document.getElementById('message');
 const envelopeImg = document.getElementById('envelopeImg');
@@ -376,4 +424,5 @@ document.addEventListener('click', (e) => {
         // Меняем текст на луне
         alert('🌙 Ты загадал(а) желание? Оно обязательно сбудется! ✨');
     }
+
 });
